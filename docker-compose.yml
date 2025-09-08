@@ -1,0 +1,63 @@
+version: "3"
+
+services:
+  postgres_of_mybox_app:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: mypassword@1234
+      POSTGRES_USER: admin_fb
+      POSTGRES_DB: db_fb
+    volumes:
+      - pgdata:/var/lib/postgresql/data   # <--- persist DB data here
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+    networks:
+      mybox_app_network:
+        ipv4_address: 172.50.0.2
+
+  mybox_app:
+    build: .
+    image: mybox:1.0
+    container_name: mybox_app
+    command: bash startup/start.sh
+    restart: unless-stopped
+    volumes:
+      - "./fastbox:/fastbox"
+    ports:
+      - 8001:8001
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+    depends_on:
+      - postgres_of_mybox_app
+      - redis_of_mybox
+    networks:
+      mybox_app_network:
+        ipv4_address: 172.50.0.3
+
+  redis_of_mybox:
+    image: redis:latest
+    container_name: redis_of_mybox_app
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+    networks:
+      mybox_app_network:
+        ipv4_address: 172.50.0.4
+
+networks:
+  mybox_app_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.50.0.0/16
+
+volumes:
+  pgdata:        # <--- volume definition for postgres
+

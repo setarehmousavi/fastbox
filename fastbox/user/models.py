@@ -31,7 +31,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(
         max_length=13,
         unique=True,
-        # validators=[validators.RegexValidator(regex=r'^989[0-3,9]\d{8}$')],
+        validators=[validators.RegexValidator(regex=r'^989[0-3,9]\d{8}$')],
         error_messages={'unique': _("The phone number already exists")},
     )
     email = models.EmailField(unique=True)

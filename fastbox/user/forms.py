@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 User = get_user_model()
 
-class RegisterationForm(forms.ModelForm):
+class UserRegisterationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, label="Password")
     password2 = forms.CharField(widget=forms.PasswordInput, label="Confirm Password")
 
@@ -20,6 +20,5 @@ class RegisterationForm(forms.ModelForm):
         if pass1 != pass2:
             raise ValidationError("Passwords Does not Match!")
         return pass2
-
 
 

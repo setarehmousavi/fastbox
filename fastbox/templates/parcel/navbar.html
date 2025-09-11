@@ -1,26 +1,105 @@
 {% load static %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+     .navbar-custom {
+    background-color: #5885b6; /* Bootstrap blue */
+  }
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-    aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+  .navbar-custom .navbar-brand,
+  .navbar-custom .nav-link,
+  .navbar-custom svg {
+    color: rgb(247, 250, 77);
+    transition: all 0.3s ease;
+  }
+
+  .navbar-custom .nav-link {
+    position: relative;
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-custom .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 5px;
+    width: 0;
+    height: 2px;
+    background-color: #5885b6;
+    transition: width 0.3s ease;
+  }
+
+  .navbar-custom .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .navbar-custom .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #dceeff;
+    transform: translateY(-2px);
+  }
+
+  .navbar-custom .navbar-brand:hover {
+    color: #dceeff;
+    transform: scale(1.05);
+  }
+
+  .navbar-custom .nav-item.active .nav-link {
+    font-weight: bold;
+    border-bottom: 2px solid white;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <a class="navbar-brand d-flex align-items-center" href="{% url 'user:index' %}">
+    <!-- Lightning Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lightning mr-2" viewBox="0 0 16 16">
+      <path d="M5.52.359A.5.5 0 0 1 6 0h4a.5.5 0 0 1 .474.658L8.694 6H12.5a.5.5 0 0 1 .395.807l-7 9a.5.5 0 0 1-.873-.454L6.823 9.5H3.5a.5.5 0 0 1-.48-.641zM6.374 1 4.168 8.5H7.5a.5.5 0 0 1 .478.647L6.78 13.04 11.478 7H8a.5.5 0 0 1-.474-.658L9.306 1z"/>
+    </svg>
+    FASTBOX
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand" href="#">FASTBOX</a>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">SHIPMENT <span class="sr-only"></span></a>
+        <a class="nav-link" href="{% url 'user:index' %}">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">TRACKING CODE</a>
+        <a class="nav-link" href="#">tracking code</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">DASHBOARD</a>
+        <a class="nav-link" href="#">Shipment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Dashboard</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-auto" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
+    <!-- Right side -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" href="{% url 'user:signup' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-circle mr-1" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+          </svg>
+          SIGNUP
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'user:login' %}">LOGIN</a>
+      </li>
+    </ul>
   </div>
 </nav>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+

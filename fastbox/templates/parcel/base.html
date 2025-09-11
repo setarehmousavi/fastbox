@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>---FASTBOX---</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form_styles.css' %}">
 </head>
-<body>
+<body style="background-color: rgb(247, 247, 160);">
     {%include 'parcel/navbar.html'%}
     
     {%block mainblock%}
@@ -14,6 +15,7 @@
     {%endblock%}
 
 
+    {%include 'parcel/footer.html'%}
 
 
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

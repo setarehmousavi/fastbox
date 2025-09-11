@@ -1,7 +1,122 @@
 {% extends "parcel/base.html" %}
 {% load static %}
 {% block mainblock %}
+<style>
+    .feature-box {
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 20px;
+text-align: center;
+transition: all 0.3s ease;
+background: #fff;
+}
+.feature-box:hover {
+box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+transform: translateY(-5px);
+}
+.feature-box img {
+max-width: 100%;
+height: 150px;
+object-fit: cover;
+border-radius: 6px;
+margin-bottom: 15px;
+}
+.section-title {
+text-align: center;
+margin-bottom: 30px;
+}
 
-<h1>hello</h1>
+</style>
+
+<div class="container py-5">
+<!-- Section Title -->
+<div class="section-title">
+<h2>Package Delivery & Order Placement Methods</h2>
+<p class="text-muted">
+At Tipax, sending packages — both within the same city and across cities in Iran — is simple and flexible.
+Choose the method that best suits you.
+</p>
+</div>
+
+<!-- Features Row -->
+<div class="row g-4">
+<div class="col-md-4">
+<div class="feature-box">
+<img src="{% static 'images/track.png' %}" alt="MyTipax">
+<h5>MyTipax</h5>
+<p>Place your order easily via the MyTipax mobile app or website.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box">
+<img src="{% static 'images/parcel.png' %}" alt="MyTipax">
+<h5>Fast Box Shipment Update</h5>
+<p>You can expect timely delivery with real-time tracking updates.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box">
+<img src="{% static 'images/contacts.png' %}" alt="MyTipax">
+<h5>Contacting Branches</h5>
+<p>You can place an order by calling the central office.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Package Journey Section -->
+
+<section class="package-journey-section py-5">
+    <h3 style="text-align: center;">Package Journey</h3>
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-md-2 col-sm-6">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-description">
+            <h6>Order Placement:</h6>
+            <p style="font-size: small;">Start by placing your delivery request using one of our available booking methods.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-sm-6">
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-description">
+            <h6>Pickup:</h6>
+            <p style="font-size: small;">Once your order is confirmed, we’ll arrange for your package to be picked up from the sender’s location.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-sm-6">
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-description">
+            <h6s>Processing & Shipping:</h6>
+            <p style="font-size: small;">Your package will be sorted and processed at our automated hubs, then shipped via ground or air transportation based on your destination.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-sm-6">
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <div class="step-description">
+            <h6>Delivery:</h6>
+            <p style="font-size: small;">The package will be delivered to the recipient’s address, a smart locker (available in Tehran), or the nearest Tipax branch.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
 
 {%endblock%}

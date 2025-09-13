@@ -1,0 +1,62 @@
+{% extends "parcel/base.html" %}
+{% load static %}
+{% block title %}---create parcel--- {% endblock %}
+{% block mainblock %}
+    <style>
+        body {
+            background-color: #f7f9fc;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        .form-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .btn-custom {
+            background-color: #5885b6;
+            color: #fff;
+        }
+        .btn-custom:hover {
+            background-color: #476a94;
+        }
+    </style>
+
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6">
+    <div class="card shadow">
+      <div class="card-body">
+
+        <h5 class="card-title mb-4 text-center">ثبت مرسوله</h5>
+
+        <form method="post">{% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-brand w-100">ثبت مرسوله</button>
+        </form>
+
+        {% if tracking_info %}
+        <div class="alert alert-success mt-4">
+          <h6>مرسوله ثبت شد!</h6>
+          <p><strong>کد پیگیری:</strong> {{ tracking_info.tracking_code }}</p>
+          <p><strong>قیمت تخمینی:</strong> {{ tracking_info.estimated_price }} تومان</p>
+          <p><strong>زمان تحویل:</strong> {{ tracking_info.estimated_days }} روز</p>
+          <a href="{% url 'shipment:track_result' tracking_info.tracking_code %}" class="btn btn-sm btn-primary mt-2">
+            مشاهده جزئیات مرسوله
+          </a>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+

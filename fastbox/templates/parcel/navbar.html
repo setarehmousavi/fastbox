@@ -69,34 +69,44 @@
         <a class="nav-link" href="{% url 'user:index' %}">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">tracking code</a>
+        <a class="nav-link" href="{% url 'shipment:track_search' %}">Tracking Code</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Shipment</a>
+        <a class="nav-link" href="{% url 'shipment:parcel_create' %}">Shipment</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Dashboard</a>
-      </li>
+      {% if request.user.is_authenticated and request.user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'shipment:dashboard' %}">Dashboard</a>
+        </li>
+      {% endif %}
     </ul>
 
     <!-- Right side -->
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="{% url 'user:signup' %}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-circle mr-1" viewBox="0 0 16 16">
-            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-          </svg>
-          SIGNUP
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'user:login' %}">LOGIN</a>
-      </li>
+      {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{% url 'user:logout' %}">
+            <!-- Optional: Show username -->
+            {{ user.username }} | Logout
+          </a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{% url 'user:signup' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-circle mr-1" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+            </svg>
+            SIGNUP
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'user:login' %}">LOGIN</a>
+        </li>
+      {% endif %}
     </ul>
   </div>
 </nav>
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>

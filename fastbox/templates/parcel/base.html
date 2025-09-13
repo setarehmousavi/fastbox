@@ -1,24 +1,23 @@
+<!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>---FASTBOX---</title>
+    <title>{% block title %}---fastbox--- {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
     <link rel="stylesheet" href="{% static 'css/form_styles.css' %}">
 </head>
 <body style="background-color: rgb(247, 247, 160);">
-    {%include 'parcel/navbar.html'%}
-    
-    {%block mainblock%}
+    {% include 'parcel/navbar.html' %}
 
-    {%endblock%}
+    {% block mainblock %}
+    {% endblock %}
 
-
-    {%include 'parcel/footer.html'%}
-
+    {% include 'parcel/footer.html' %}
 
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 </body>
 </html>
-

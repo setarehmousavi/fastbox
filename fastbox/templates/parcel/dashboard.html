@@ -1,0 +1,82 @@
+{% extends 'parcel/base.html' %}
+{% block title %}---dashboard--- {% endblock %}
+{% block mainblock %}
+<style>
+    /* بزرگ‌تر کردن جدول */
+    .dashboard-table {
+        font-size: 0.95rem;
+    }
+
+    /* هدر آبی مشابه navbar */
+    .dashboard-table thead {
+        background-color: #f4f7fb; /* آبی Bootstrap */
+        color: rgb(29, 40, 47);
+    }
+
+    /* فرم کوچک‌تر داخل جدول */
+    .dashboard-table select.form-select-sm {
+        font-size: 0.85rem;
+        padding: 0.25rem 0.4rem;
+    }
+
+    .dashboard-table button.btn-sm {
+        font-size: 0.85rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    /* جدول داخلی تاریخچه */
+    .nested-table {
+        font-size: 0.85rem;
+        margin-bottom: 0;
+    }
+</style>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-primary">
+    <tr>
+      <th>کد رهگیری</th>
+      <th>گیرنده</th>
+      <th>مبدا → مقصد</th>
+      <th>وضعیت فعلی</th>
+      <th>تغییر وضعیت</th>
+      <th>کنسل کردن</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for parcel in parcels %}
+    <tr>
+      <td>{{ parcel.tracking_code }}</td>
+      <td>{{ parcel.receiver_name }}</td>
+      <td>{{ parcel.origin_city }} → {{ parcel.destination_city }}</td>
+      <td>{{ parcel.get_status_display }}</td>
+      
+      <!-- Change status -->
+      <td>
+        <form method="post" class="d-flex align-items-center">
+          {% csrf_token %}
+          <input type="hidden" name="parcel_id" value="{{ parcel.id }}">
+          {{ parcel.status_form.status }}
+          <button type="submit" class="btn btn-sm btn-primary ms-2">ثبت</button>
+        </form>
+      </td>
+
+      <!-- Cancel order -->
+      <td>
+        {% if parcel.status != 'cancelled' %}
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="parcel_id" value="{{ parcel.id }}">
+          <input type="hidden" name="status" value="cancelled">
+          <button type="submit" class="btn btn-sm btn-danger">کنسل</button>
+        </form>
+        {% else %}
+        <span class="text-muted">کنسل شد</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

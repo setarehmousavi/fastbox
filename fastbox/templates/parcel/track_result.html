@@ -1,0 +1,60 @@
+{% extends 'parcel/base.html' %}
+{% block title %} ---result---{% endblock %}
+
+{% block mainblock %}
+<div class="container py-4" style="background-color: #ffffff; color: #0a4275;margin-top: 50px;">
+
+  <h4 class="mb-4 text-center">
+    Tracking code: 
+    <span style="background-color: #ffd6e0; color: #3b82f6; padding: 0.4em 0.8em; border-radius: 0.35rem; font-weight: 600;">
+      {{ parcel.tracking_code }}
+    </span>
+  </h4>
+
+  <div class="row g-4">
+
+    <!-- Parcel details -->
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title mb-3" style="background-color: #5885b6;text-align: center;">Details</h5>
+          <ul class="list-unstyled fs-6">
+            <li><strong>Origin City:</strong> {{ parcel.origin_city }}</li>
+            <li><strong>Destination City:</strong> {{ parcel.destination_city }}</li>
+            <li><strong>Weight:</strong> {{ parcel.weight }} kg</li>
+            <li><strong>Estimated Price:</strong> {{ parcel.estimated_price }} تومان</li>
+            <li><strong>Estimated Days:</strong> {{ parcel.estimated_days }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parcel events -->
+    <div class="col-md-6">
+      <h5 class="mb-3">Events</h5>
+      {% if events %}
+        {% for e in events %}
+        <div class="card mb-3 shadow-sm" style="background-color: #fff3cd; color: #0a4275;">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="fw-bold fs-6">{{ e.status }}</div>
+                <div class="small text-muted">{{ e.location }} — {{ e.note }}</div>
+              </div>
+              <span class="badge text-bg-secondary">{{ e.occurred_at|date:"Y-m-d H:i" }}</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="card shadow-sm" style="background-color: #fff3cd; color: #0a4275;">
+          <div class="card-body">
+            <p class="mb-0">Pending...</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+{% endblock %}
